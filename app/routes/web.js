@@ -1,5 +1,5 @@
 import express from "express";
-import { Home } from "../controllers/usersController.js";
+import homeController from "../controllers/homeController.js";
 
 const router = express.Router();
 
@@ -8,6 +8,6 @@ const router = express.Router();
  *================================
  */
 
-router.get("/", Home);
+router.get("/", homeController.index);
 
 export default router;
