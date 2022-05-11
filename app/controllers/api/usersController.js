@@ -24,10 +24,16 @@ var userController;
 
 const index = (req, res) => {
   usersModel.getData((err, result) => {
-    res.json({
-      statusCode: 200,
-      lisData: result,
-    });
+    res.end(
+      JSON.stringify(
+        {
+          statusCode: 200,
+          listData: result,
+        },
+        null,
+        4
+      )
+    );
   });
 };
 
