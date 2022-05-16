@@ -1,4 +1,8 @@
 import mysql from "mysql";
+import dotenv from "dotenv";
+
+//Dotenv Load
+dotenv.config();
 
 /*================================
  * Configure your database in here
@@ -6,15 +10,17 @@ import mysql from "mysql";
  */
 
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "express_db",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
 });
 
-db.connect((err) => {
-  if (err) throw err;
-  console.log("Database connect successfull..");
-});
+if (process.env.DB_HOST) {
+  db.connect((err) => {
+    if (err) throw err;
+    console.log("Database connect successfull..");
+  });
+}
 
 export default db;

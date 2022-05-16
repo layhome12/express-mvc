@@ -3,7 +3,7 @@
  *====================================================
  * import usersModel from "../models/usersModel.js";
  *
- * var userController;
+ * let userController;
 
  * const index = (req, res) => {
  * usersModel.getData((err, result) => {
@@ -19,7 +19,7 @@
  *===================================================
  */
 
-var homeController;
+let homeController;
 
 const index = (req, res) => {
   res.render("home");
