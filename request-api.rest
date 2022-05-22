@@ -11,7 +11,7 @@ Content-Type: application/json
 {
     "username":"layhome12",
     "password":"password",
-    "user_nama":"Layhome"
+    "user_nama":"Layhome Sync"
 }
 
 ### UPDATE DATA
@@ -19,7 +19,7 @@ PUT http://192.168.0.2:8081/api/users/1
 Content-Type: application/json
 
 {
-    "password":"synccorp"
+    "password":"password"
 }
 
 ### DELETE DATA
