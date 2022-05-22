@@ -4,5 +4,5 @@ Jalankan npm install terlebih dahulu untuk menginstallnya
 
 Fitur Baru
 - Configurasi .env
-- Pretty print JSON
-- Libray systemApi
+- Prettry print JSON
+- Sequelize Querry Builder

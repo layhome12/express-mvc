@@ -1,0 +1,27 @@
+### GET ALL DATA
+GET http://192.168.0.2:8081/api/users
+
+### GET ONE DATA
+GET http://192.168.0.2:8081/api/users/1
+
+### CREATE DATA
+POST http://192.168.0.2:8081/api/users
+Content-Type: application/json
+
+{
+    "username":"layhome12",
+    "password":"password",
+    "user_nama":"Layhome"
+}
+
+### UPDATE DATA
+PUT http://192.168.0.2:8081/api/users/1
+Content-Type: application/json
+
+{
+    "password":"synccorp"
+}
+
+### DELETE DATA
+
+DELETE http://192.168.0.2:8081/api/users/1

@@ -1,71 +1,57 @@
 /*===================================================
  *                   Model Example
  *===================================================
- *   import db from "../config/database.js";
+ *  import { DataTypes } from "sequelize";
+ *  import db from "../config/database.js";
  *
- *   let usersModel;
+ * const userModel = db.define(
+ *   'table_name',
+ *    {
+ *      column:{
+ *        type: DataTypes.STRING
+ *      }
+ *    },
+ *    {
+ *      freezeTableName: true
+ *    }
+ * );
  *
- *   const getData = (result) => {
- *     let sql = "SELECT * FROM users";
- *     db.query(sql, (err, results) => {
- *       if (err) throw err;
- *       result(null, results);
- *     });
- *   };
- *
- *   export default usersModel = {
- *     getData,
- *   };
+ * export default userModel;
  *==================================================
  */
+import { DataTypes } from "sequelize";
 import db from "../config/database.js";
 
-let usersModel;
+const userModel = db.define(
+  "users",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+    },
+    _token: {
+      type: DataTypes.STRING,
+    },
+    username: {
+      type: DataTypes.STRING,
+    },
+    password: {
+      type: DataTypes.STRING,
+    },
+    user_nama: {
+      type: DataTypes.STRING,
+    },
+    created_at: {
+      type: DataTypes.DATE,
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+    },
+  },
+  {
+    freezeTableName: true,
+    timestamps: false,
+  }
+);
 
-const getData = (result) => {
-  let sql = "SELECT * FROM users";
-  db.query(sql, (err, results) => {
-    if (err) throw err;
-    result(null, results);
-  });
-};
-
-const getDataId = (id, result) => {
-  let sql = "SELECT * FROM users WHERE id=?";
-  db.query(sql, [id], (err, results) => {
-    if (err) throw err;
-    result(null, results);
-  });
-};
-
-const insertData = (data, result) => {
-  let sql = "INSERT INTO users (username, password) VALUES (?,?)";
-  db.query(sql, [data.username, data.password], (err, results) => {
-    if (err) throw err;
-    result(null, results);
-  });
-};
-
-const updateData = (data, id, result) => {
-  let sql = "UPDATE users SET username=?, password=? WHERE id=?";
-  db.query(sql, [data.username, data.password, id], (err, results) => {
-    if (err) throw err;
-    result(null, results);
-  });
-};
-
-const deleteData = (id, result) => {
-  let sql = "DELETE FROM users WHERE id=?";
-  db.query(sql, [id], (err, results) => {
-    if (err) throw err;
-    result(null, results);
-  });
-};
-
-export default usersModel = {
-  getData,
-  getDataId,
-  insertData,
-  updateData,
-  deleteData,
-};
+export default userModel;

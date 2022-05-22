@@ -9,5 +9,6 @@ const router = express.Router();
  */
 
 router.get("/", homeController.index);
+router.get("/debug", homeController.debug);
 
 export default router;

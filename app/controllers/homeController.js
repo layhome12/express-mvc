@@ -25,6 +25,11 @@ const index = (req, res) => {
   res.render("home");
 };
 
+const debug = (req, res) => {
+  res.send(null);
+};
+
 export default homeController = {
   index,
+  debug,
 };

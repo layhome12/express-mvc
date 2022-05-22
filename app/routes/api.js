@@ -1,7 +1,6 @@
 import express from "express";
 import usersController from "../controllers/api/usersController.js";
 
-const app = express();
 const router = express.Router();
 
 /*===================================

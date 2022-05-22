@@ -1,4 +1,4 @@
-import mysql from "mysql";
+import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
 
 //Dotenv Load
@@ -9,18 +9,23 @@ dotenv.config();
  *================================
  */
 
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-});
+const db = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASS,
+  {
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_DIAL,
+  }
+);
 
-if (process.env.DB_HOST) {
-  db.connect((err) => {
-    if (err) throw err;
-    console.log("Database connect successfull..");
-  });
+if (process.env.DB_CONN == "true") {
+  try {
+    await db.authenticate();
+    console.log("Database connect successful..");
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 export default db;

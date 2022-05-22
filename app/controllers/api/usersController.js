@@ -1,75 +1,169 @@
 /*====================================================
  *                 Example Controller
  *====================================================
- * import usersModel from "../models/usersModel.js";
- * import systemApi from "../../library/systemApi.js";
+ *   import usersModel from "../../models/usersModel.js";
+ *   import systemApi from "../../library/systemApi.js";
  *
- * let userController;
+ *   let userController;
  *
- * const index = (req, res) => {
- *   usersModel.getData((err, result) => {
- *     systemApi.jsonResponse(res, result);
- *   });
- * };
+ *   const index = async (req, res) => {
+ *     try {
+ *       let userData = await usersModel.findAll();
+ *       systemApi.jsonResponse(res, {
+ *         statusCode: 200,
+ *         listData: userData,
+ *       });
+ *     } catch (error) {
+ *       systemApi.jsonResponse(
+ *         res,
+ *         {
+ *           statusCode: 500,
+ *           message: error,
+ *         },
+ *         500
+ *       );
+ *     }
+ *   };
  *
- * export default userController = {
- *  index,
- * };
+ *   export default userController = {
+ *     index
+ *   };
  *===================================================
  */
+import bcrypt from "bcrypt";
 import usersModel from "../../models/usersModel.js";
-import systemApi from "../../library/systemApi.js";
+import systemApi from "../../libraries/systemApi.js";
+import dateHelper from "../../helpers/dateHelper.js";
 
 let userController;
 
-const index = (req, res) => {
-  usersModel.getData((err, result) => {
+const index = async (req, res) => {
+  try {
+    let userData = await usersModel.findAll();
+
     systemApi.jsonResponse(res, {
       statusCode: 200,
-      listData: result,
+      listData: userData,
     });
-  });
+  } catch (error) {
+    systemApi.jsonResponse(
+      res,
+      {
+        statusCode: 500,
+        message: error,
+      },
+      500
+    );
+  }
 };
 
-const show = (req, res) => {
+const show = async (req, res) => {
   let id = req.params.id;
-  usersModel.getDataId(id, (err, result) => {
+  try {
+    let userData = await usersModel.findOne({
+      where: {
+        id: id,
+      },
+    });
+
     systemApi.jsonResponse(res, {
       statusCode: 200,
-      listData: result,
+      listData: userData,
     });
-  });
+  } catch (error) {
+    systemApi.jsonResponse(
+      res,
+      {
+        statusCode: 500,
+        message: error,
+      },
+      500
+    );
+  }
 };
 
-const store = (req, res) => {
+const store = async (req, res) => {
   let data = req.body;
-  usersModel.insertData(data, (err, result) => {
+  let salt = await bcrypt.genSalt();
+
+  data.password = await bcrypt.hash(data.password, salt);
+  data.created_at = dateHelper.dateNow();
+
+  try {
+    await usersModel.create(data);
+
     systemApi.jsonResponse(res, {
       statusCode: 200,
       message: "Data is Created",
     });
-  });
+  } catch (error) {
+    systemApi.jsonResponse(
+      res,
+      {
+        statusCode: 500,
+        message: error,
+      },
+      500
+    );
+  }
 };
 
-const update = (req, res) => {
+const update = async (req, res) => {
   let id = req.params.id;
   let data = req.body;
-  usersModel.updateData(data, id, (err, result) => {
+
+  if (data.password) {
+    let salt = await bcrypt.genSalt();
+    data.password = await bcrypt.hash(data.password, salt);
+  }
+  data.updated_at = dateHelper.dateNow();
+
+  try {
+    await usersModel.update(data, {
+      where: {
+        id: id,
+      },
+    });
+
     systemApi.jsonResponse(res, {
       statusCode: 200,
       message: "Data is Updated",
     });
-  });
+  } catch (error) {
+    systemApi.jsonResponse(
+      res,
+      {
+        statusCode: 500,
+        message: error,
+      },
+      500
+    );
+  }
 };
 
-const destroy = (req, res) => {
+const destroy = async (req, res) => {
   let id = req.params.id;
-  usersModel.deleteData(id, (err, result) => {
+  try {
+    await usersModel.destroy({
+      where: {
+        id: id,
+      },
+    });
+
     systemApi.jsonResponse(res, {
       statusCode: 200,
       message: "Data is Deleted",
     });
-  });
+  } catch (error) {
+    systemApi.jsonResponse(
+      res,
+      {
+        statusCode: 500,
+        message: error,
+      },
+      500
+    );
+  }
 };
 
 export default userController = {
