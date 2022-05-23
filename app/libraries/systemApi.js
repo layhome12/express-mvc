@@ -1,7 +1,5 @@
 import os from "os";
 
-let systemApi;
-
 const jsonResponse = (res, data, statusCode = 200) => {
   return res.status(statusCode).end(JSON.stringify(data, null, 4));
 };
@@ -25,7 +23,7 @@ const netLocal = (result) => {
   console.log(results);
 };
 
-export default systemApi = {
+export default {
   jsonResponse,
   netLocal,
 };

@@ -3,8 +3,6 @@
  *====================================================
  * import usersModel from "../models/usersModel.js";
  *
- * let userController;
-
  * const index = (req, res) => {
  * usersModel.getData((err, result) => {
  *     res.render("home", {
@@ -12,14 +10,12 @@
  *     });
  *   });
  * };
- * 
- * export default userController = {
+ *
+ * export default {
  *  index,
  * };
  *===================================================
  */
-
-let homeController;
 
 const index = (req, res) => {
   res.render("home");
@@ -29,7 +25,7 @@ const debug = (req, res) => {
   res.send(null);
 };
 
-export default homeController = {
+export default {
   index,
   debug,
 };

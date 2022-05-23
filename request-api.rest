@@ -1,31 +1,37 @@
 ### GET ALL DATA
 GET http://localhost:8081/api/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJsYXlob21lMTIiLCJpYXQiOjE2NTMyODEyMTEsImV4cCI6MTY1MzI4MTI0MX0.j-JOm5lDR-ga6XvHA_ImrCWiYtBjODKMo_atFgROJt8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJsYXlob21lMTIiLCJpYXQiOjE2NTMyODc4NjEsImV4cCI6MTY1MzI4ODc2MX0.HFqDM81YkZymvKbpgAX2JvUAXqJ26cP4knCXn9pp--A
 
 ### GET ONE DATA
 GET http://localhost:8081/api/users/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJsYXlob21lMTIiLCJpYXQiOjE2NTMyODc5NDcsImV4cCI6MTY1MzI4ODg0N30.8lkaULyrZON2s6XZa023dyvvtc8Kski9vm_IP7v0Ymc
 
 ### CREATE DATA
 POST http://localhost:8081/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJsYXlob21lMTIiLCJpYXQiOjE2NTMyODU3NzgsImV4cCI6MTY1MzI4NjY3OH0.nAjPgzcdS6YhGuKyUb9yH6ZOlKHuPp3npypOg5-At5c
 Content-Type: application/json
 
 {
-    "username":"layhome12",
+    "username":"astro12",
     "password":"password",
-    "user_nama":"Layhome Sync"
+    "user_nama":"Astro Sync"
 }
 
 ### UPDATE DATA
-PUT http://localhost:8081/api/users/1
+PUT http://localhost:8081/api/users/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJsYXlob21lMTIiLCJpYXQiOjE2NTMyODU3NzgsImV4cCI6MTY1MzI4NjY3OH0.nAjPgzcdS6YhGuKyUb9yH6ZOlKHuPp3npypOg5-At5c
 Content-Type: application/json
 
 {
-    "password":"password"
+    "username":"username",
+    "password":"password",
+    "user_nama":"User 1"
 }
 
 ### DELETE DATA
 
-DELETE http://localhost:8081/api/users/1
+DELETE http://localhost:8081/api/users/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJsYXlob21lMTIiLCJpYXQiOjE2NTMyODU3NzgsImV4cCI6MTY1MzI4NjY3OH0.nAjPgzcdS6YhGuKyUb9yH6ZOlKHuPp3npypOg5-At5c
 
 ### AUTHENTICATE
 POST http://localhost:8081/api/auth

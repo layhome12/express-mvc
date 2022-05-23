@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import systemApi from "../libraries/systemApi.js";
 
 import usersModel from "../models/usersModel.js";
 
@@ -16,7 +15,7 @@ export const generateToken = async (res, userData) => {
     },
     process.env.ACCESS_SECRET_TOKEN,
     {
-      expiresIn: "30s",
+      expiresIn: "15m",
     }
   );
 
@@ -28,14 +27,15 @@ export const generateToken = async (res, userData) => {
     },
     process.env.REFRESH_SECRET_TOKEN,
     {
-      expiresIn: "12h",
+      expiresIn: "1h",
     }
   );
 
-  //Update Token Refresh
+  //Update Token and Refresh
   await usersModel.update(
     {
-      _token: refreshToken,
+      _token: accessToken,
+      _refresh: refreshToken,
     },
     {
       where: {
@@ -47,7 +47,7 @@ export const generateToken = async (res, userData) => {
   //Set Cookie Token
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    maxAge: 12 * 60 * 60 * 1000,
+    maxAge: 24 * 60 * 60 * 1000,
   });
 
   return accessToken;
@@ -56,22 +56,13 @@ export const generateToken = async (res, userData) => {
 export const refreshToken = async (res, cookieToken) => {
   let userData = await usersModel.findOne({
     where: {
-      _token: cookieToken,
+      _refresh: cookieToken,
     },
-    attributes: ["id", "_token", "username"],
+    attributes: ["id", "username"],
   });
 
   //Check is Valid
-  if (!userData) {
-    return systemApi.jsonResponse(
-      res,
-      {
-        statusCode: 403,
-        message: "Refresh token is not valid",
-      },
-      403
-    );
-  }
+  if (!userData) return false;
 
   //Generate Access Token
   let accessToken = jwt.sign(
@@ -81,7 +72,19 @@ export const refreshToken = async (res, cookieToken) => {
     },
     process.env.ACCESS_SECRET_TOKEN,
     {
-      expiresIn: "30s",
+      expiresIn: "15m",
+    }
+  );
+
+  //Update Token
+  await usersModel.update(
+    {
+      _token: accessToken,
+    },
+    {
+      where: {
+        id: userData.id,
+      },
     }
   );
 
@@ -91,27 +94,19 @@ export const refreshToken = async (res, cookieToken) => {
 export const destroyToken = async (res, cookieToken) => {
   let userData = await usersModel.findOne({
     where: {
-      _token: cookieToken,
+      _refresh: cookieToken,
     },
     attributes: ["id", "_token", "username"],
   });
 
   //Check is Valid
-  if (!userData) {
-    return systemApi.jsonResponse(
-      res,
-      {
-        statusCode: 403,
-        message: "Refresh token is not valid",
-      },
-      403
-    );
-  }
+  if (!userData) return false;
 
   //Update Token Refresh
   await usersModel.update(
     {
       _token: null,
+      _refresh: null,
     },
     {
       where: {

@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 import systemApi from "../libraries/systemApi.js";
+import userModel from "../models/usersModel.js";
 
 //Dotenv Load
 dotenv.config();
@@ -20,19 +21,42 @@ export const verifyToken = (req, res, next) => {
       401
     );
   }
+  
+  //Verify Token
+  jwt.verify(
+    tokenHeader,
+    process.env.ACCESS_SECRET_TOKEN,
+    async (err, decode) => {
+      if (err) {
+        return systemApi.jsonResponse(
+          res,
+          {
+            statusCode: 403,
+            message: "Bearer token is not valid",
+          },
+          403
+        );
+      }
 
-  jwt.verify(tokenHeader, process.env.ACCESS_SECRET_TOKEN, (err, decode) => {
-    if (err) {
-      return systemApi.jsonResponse(
-        res,
-        {
-          statusCode: 403,
-          message: "Bearer token is not valid",
+      //Check User Logout
+      let userData = await userModel.findOne({
+        where: {
+          _token: tokenHeader,
         },
-        403
-      );
-    }
+      });
 
-    next();
-  });
+      if (!userData || !userData._token) {
+        return systemApi.jsonResponse(
+          res,
+          {
+            statusCode: 403,
+            message: "This user has been logged out",
+          },
+          403
+        );
+      }
+
+      next();
+    }
+  );
 };

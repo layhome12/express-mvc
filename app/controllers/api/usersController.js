@@ -24,8 +24,6 @@ import usersModel from "../../models/usersModel.js";
 import systemApi from "../../libraries/systemApi.js";
 import dateHelper from "../../helpers/dateHelper.js";
 
-let userController;
-
 const index = async (req, res) => {
   let userData = await usersModel.findAll();
 
@@ -133,7 +131,7 @@ const destroy = async (req, res) => {
   }
 };
 
-export default userController = {
+export default {
   index,
   show,
   store,

@@ -8,8 +8,6 @@ import {
 
 import userModel from "../../models/usersModel.js";
 
-let authController;
-
 const auth = async (req, res) => {
   let data = req.body;
   let userData = await userModel.findOne({
@@ -68,6 +66,16 @@ const refreshAuth = async (req, res) => {
   }
 
   let tokenAccess = await refreshToken(res, cookieToken);
+  if (!tokenAccess) {
+    return systemApi.jsonResponse(
+      res,
+      {
+        statusCode: 403,
+        message: "Refresh token is not valid",
+      },
+      403
+    );
+  }
   return systemApi.jsonResponse(res, {
     statusCode: 200,
     message: "Generate token successful..",
@@ -77,7 +85,27 @@ const refreshAuth = async (req, res) => {
 
 const logout = async (req, res) => {
   let cookieToken = req.cookies.refreshToken;
-  await destroyToken(res, cookieToken);
+  if (!cookieToken) {
+    return systemApi.jsonResponse(
+      res,
+      {
+        statusCode: 401,
+        message: "Access token is required",
+      },
+      401
+    );
+  }
+  let logoutAccess = await destroyToken(res, cookieToken);
+  if (!logoutAccess) {
+    return systemApi.jsonResponse(
+      res,
+      {
+        statusCode: 403,
+        message: "Access token is not valid",
+      },
+      403
+    );
+  }
 
   return systemApi.jsonResponse(res, {
     statusCode: 200,
@@ -85,8 +113,8 @@ const logout = async (req, res) => {
   });
 };
 
-export default authController = {
+export default {
   auth,
   refreshAuth,
-  logout
+  logout,
 };

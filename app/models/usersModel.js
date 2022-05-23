@@ -32,6 +32,9 @@ const userModel = db.define(
     _token: {
       type: DataTypes.STRING,
     },
+    _refresh: {
+      type: DataTypes.STRING,
+    },
     username: {
       type: DataTypes.STRING,
     },
