@@ -3,7 +3,7 @@ import os from "os";
 let systemApi;
 
 const jsonResponse = (res, data, statusCode = 200) => {
-  res.status(statusCode).end(JSON.stringify(data, null, 4));
+  return res.status(statusCode).end(JSON.stringify(data, null, 4));
 };
 
 const netLocal = (result) => {

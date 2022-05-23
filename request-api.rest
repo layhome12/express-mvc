@@ -1,11 +1,12 @@
 ### GET ALL DATA
-GET http://192.168.0.2:8081/api/users
+GET http://localhost:8081/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJsYXlob21lMTIiLCJpYXQiOjE2NTMyODEyMTEsImV4cCI6MTY1MzI4MTI0MX0.j-JOm5lDR-ga6XvHA_ImrCWiYtBjODKMo_atFgROJt8
 
 ### GET ONE DATA
-GET http://192.168.0.2:8081/api/users/1
+GET http://localhost:8081/api/users/1
 
 ### CREATE DATA
-POST http://192.168.0.2:8081/api/users
+POST http://localhost:8081/api/users
 Content-Type: application/json
 
 {
@@ -15,7 +16,7 @@ Content-Type: application/json
 }
 
 ### UPDATE DATA
-PUT http://192.168.0.2:8081/api/users/1
+PUT http://localhost:8081/api/users/1
 Content-Type: application/json
 
 {
@@ -24,4 +25,21 @@ Content-Type: application/json
 
 ### DELETE DATA
 
-DELETE http://192.168.0.2:8081/api/users/1
+DELETE http://localhost:8081/api/users/1
+
+### AUTHENTICATE
+POST http://localhost:8081/api/auth
+Content-Type: application/json
+
+{
+    "username":"layhome12",
+    "password":"password"
+}
+
+### REFRESH TOKEN
+GET http://localhost:8081/api/auth/refresh
+
+### LOGOUT
+GET http://localhost:8081/api/logout
+
+

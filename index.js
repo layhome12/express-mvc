@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 
 import routerWeb from "./app/routes/web.js";
 import routerApi from "./app/routes/api.js";
@@ -19,6 +20,9 @@ app.set("view engine", "hbs");
 //Body Parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+//Cookie Parser
+app.use(cookieParser());
 
 //Public Load
 app.use("/assets", express.static("public"));
