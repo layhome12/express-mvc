@@ -1,11 +1,6 @@
 import bcrypt from "bcrypt";
 import systemApi from "../../libraries/systemApi.js";
-import {
-  generateToken,
-  refreshToken,
-  destroyToken,
-} from "../../libraries/authJWT.js";
-
+import authJWT from "../../libraries/authJWT.js";
 import userModel from "../../models/usersModel.js";
 
 const auth = async (req, res) => {
@@ -46,7 +41,7 @@ const auth = async (req, res) => {
     {
       statusCode: 200,
       message: "Login Successful..",
-      token_access: await generateToken(res, userData),
+      token_access: await authJWT.generateToken(res, userData),
     },
     200
   );
@@ -65,7 +60,7 @@ const refreshAuth = async (req, res) => {
     );
   }
 
-  let tokenAccess = await refreshToken(res, cookieToken);
+  let tokenAccess = await authJWT.refreshToken(res, cookieToken);
   if (!tokenAccess) {
     return systemApi.jsonResponse(
       res,
@@ -95,7 +90,7 @@ const logout = async (req, res) => {
       401
     );
   }
-  let logoutAccess = await destroyToken(res, cookieToken);
+  let logoutAccess = await authJWT.destroyToken(res, cookieToken);
   if (!logoutAccess) {
     return systemApi.jsonResponse(
       res,

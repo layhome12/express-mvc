@@ -6,7 +6,7 @@ import usersModel from "../models/usersModel.js";
 //Dotenv Load
 dotenv.config();
 
-export const generateToken = async (res, userData) => {
+const generateToken = async (res, userData) => {
   //Generate Access Token
   let accessToken = jwt.sign(
     {
@@ -52,7 +52,7 @@ export const generateToken = async (res, userData) => {
   return accessToken;
 };
 
-export const refreshToken = async (res, cookieToken) => {
+const refreshToken = async (res, cookieToken) => {
   let userData = await usersModel.findOne({
     where: {
       _token: cookieToken,
@@ -78,7 +78,7 @@ export const refreshToken = async (res, cookieToken) => {
   return accessToken;
 };
 
-export const destroyToken = async (res, cookieToken) => {
+const destroyToken = async (res, cookieToken) => {
   let userData = await usersModel.findOne({
     where: {
       _token: cookieToken,
@@ -104,4 +104,10 @@ export const destroyToken = async (res, cookieToken) => {
   res.clearCookie("refreshToken");
 
   return true;
+};
+
+export default {
+  generateToken,
+  refreshToken,
+  destroyToken,
 };

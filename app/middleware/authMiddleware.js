@@ -2,7 +2,6 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 import systemApi from "../libraries/systemApi.js";
-import userModel from "../models/usersModel.js";
 
 //Dotenv Load
 dotenv.config();
