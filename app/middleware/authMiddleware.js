@@ -38,24 +38,6 @@ export const verifyToken = (req, res, next) => {
         );
       }
 
-      //Check User Logout
-      let userData = await userModel.findOne({
-        where: {
-          _token: tokenHeader,
-        },
-      });
-
-      if (!userData || !userData._token) {
-        return systemApi.jsonResponse(
-          res,
-          {
-            statusCode: 403,
-            message: "This user has been logged out",
-          },
-          403
-        );
-      }
-
       next();
     }
   );

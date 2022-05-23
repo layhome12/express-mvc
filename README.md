@@ -1,8 +1,12 @@
 # Express MVC
 
-Jalankan npm install terlebih dahulu untuk menginstallnya
+Jalankan npm install terlebih dahulu untuk menjalankanya
 
-Fitur Baru
+Fitur
 - Configurasi .env
 - Prettry print JSON
 - Sequelize Querry Builder
+- Validation Form
+- JSON Web Token
+
+

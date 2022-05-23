@@ -1,45 +1,45 @@
 ### GET ALL DATA
 GET http://localhost:8081/api/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJsYXlob21lMTIiLCJpYXQiOjE2NTMyODc4NjEsImV4cCI6MTY1MzI4ODc2MX0.HFqDM81YkZymvKbpgAX2JvUAXqJ26cP4knCXn9pp--A
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJsYXlob21lMTIiLCJpYXQiOjE2NTMyOTI5MTQsImV4cCI6MTY1MzI5MzgxNH0.P6uOPwI5qd4SCgM8Lmr8cpum7f5yz2EKL1GOBgBFoy8
 
 ### GET ONE DATA
 GET http://localhost:8081/api/users/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJsYXlob21lMTIiLCJpYXQiOjE2NTMyODc5NDcsImV4cCI6MTY1MzI4ODg0N30.8lkaULyrZON2s6XZa023dyvvtc8Kski9vm_IP7v0Ymc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJsYXlob21lMTIiLCJpYXQiOjE2NTMyOTE3NzIsImV4cCI6MTY1MzI5MjY3Mn0.cXyTd92fs-e1QMLjC4y-CgVm4rXSb6PsmG_6GOBarto
 
 ### CREATE DATA
 POST http://localhost:8081/api/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJsYXlob21lMTIiLCJpYXQiOjE2NTMyODU3NzgsImV4cCI6MTY1MzI4NjY3OH0.nAjPgzcdS6YhGuKyUb9yH6ZOlKHuPp3npypOg5-At5c
-Content-Type: application/json
-
-{
-    "username":"astro12",
-    "password":"password",
-    "user_nama":"Astro Sync"
-}
-
-### UPDATE DATA
-PUT http://localhost:8081/api/users/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJsYXlob21lMTIiLCJpYXQiOjE2NTMyODU3NzgsImV4cCI6MTY1MzI4NjY3OH0.nAjPgzcdS6YhGuKyUb9yH6ZOlKHuPp3npypOg5-At5c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJsYXlob21lMTIiLCJpYXQiOjE2NTMyOTIwODUsImV4cCI6MTY1MzI5Mjk4NX0.w0wM7JGx4XInETenGNTBmltouRU8gHXFV6qfXmZZG0I
 Content-Type: application/json
 
 {
     "username":"username",
     "password":"password",
-    "user_nama":"User 1"
+    "user_nama":"User Test"
+}
+
+### UPDATE DATA
+PUT http://localhost:8081/api/users/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJsYXlob21lMTIiLCJpYXQiOjE2NTMyOTIwODUsImV4cCI6MTY1MzI5Mjk4NX0.w0wM7JGx4XInETenGNTBmltouRU8gHXFV6qfXmZZG0I
+Content-Type: application/json
+
+{
+    "username":"username",
+    "password":"password",
+    "user_nama":"User Test"
 }
 
 ### DELETE DATA
 
 DELETE http://localhost:8081/api/users/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJsYXlob21lMTIiLCJpYXQiOjE2NTMyODU3NzgsImV4cCI6MTY1MzI4NjY3OH0.nAjPgzcdS6YhGuKyUb9yH6ZOlKHuPp3npypOg5-At5c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJsYXlob21lMTIiLCJpYXQiOjE2NTMyOTE3NzIsImV4cCI6MTY1MzI5MjY3Mn0.cXyTd92fs-e1QMLjC4y-CgVm4rXSb6PsmG_6GOBarto
 
 ### AUTHENTICATE
 POST http://localhost:8081/api/auth
 Content-Type: application/json
 
 {
-    "username":"layhome12",
-    "password":"password"
+   "username":"layhome12",
+   "password":"password"
 }
 
 ### REFRESH TOKEN

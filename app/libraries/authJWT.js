@@ -34,8 +34,7 @@ export const generateToken = async (res, userData) => {
   //Update Token and Refresh
   await usersModel.update(
     {
-      _token: accessToken,
-      _refresh: refreshToken,
+      _token: refreshToken,
     },
     {
       where: {
@@ -56,7 +55,7 @@ export const generateToken = async (res, userData) => {
 export const refreshToken = async (res, cookieToken) => {
   let userData = await usersModel.findOne({
     where: {
-      _refresh: cookieToken,
+      _token: cookieToken,
     },
     attributes: ["id", "username"],
   });
@@ -76,25 +75,13 @@ export const refreshToken = async (res, cookieToken) => {
     }
   );
 
-  //Update Token
-  await usersModel.update(
-    {
-      _token: accessToken,
-    },
-    {
-      where: {
-        id: userData.id,
-      },
-    }
-  );
-
   return accessToken;
 };
 
 export const destroyToken = async (res, cookieToken) => {
   let userData = await usersModel.findOne({
     where: {
-      _refresh: cookieToken,
+      _token: cookieToken,
     },
     attributes: ["id", "_token", "username"],
   });
@@ -106,7 +93,6 @@ export const destroyToken = async (res, cookieToken) => {
   await usersModel.update(
     {
       _token: null,
-      _refresh: null,
     },
     {
       where: {
