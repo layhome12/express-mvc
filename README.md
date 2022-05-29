@@ -8,5 +8,7 @@ Fitur
 - Sequelize Querry Builder
 - Validation Form
 - JSON Web Token
+- NodeMailer
+- Crypto
 
 
