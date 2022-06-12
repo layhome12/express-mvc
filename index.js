@@ -4,11 +4,16 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
+import config from "./app/config/config.js";
 import routerWeb from "./app/routes/web.js";
 import routerApi from "./app/routes/api.js";
 import corsOption from "./app/config/cors.js";
 
 const app = express();
+
+//Base URL
+const url = config.baseUrl().url;
+const port = config.baseUrl().port;
 
 //Dotenv Load
 dotenv.config();
@@ -32,6 +37,6 @@ app.use("/", routerWeb);
 app.use("/api", corsOption, routerApi);
 
 // Listen on port
-app.listen(process.env.SERVER_PORT, () =>
-  console.log(`Server Running at http://localhost:${process.env.SERVER_PORT}`)
+app.listen(port, () =>
+  console.log(`Server Running at ${url}`)
 );
