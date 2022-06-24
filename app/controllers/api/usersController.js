@@ -1,24 +1,3 @@
-/*====================================================
- *                 Example Controller
- *====================================================
- *   import usersModel from "../../models/usersModel.js";
- *   import systemApi from "../../library/systemApi.js";
- *
- *   let userController;
- *
- *   const index = async (req, res) => {
- *       let userData = await usersModel.findAll();
- *       return systemApi.jsonResponse(res, {
- *         statusCode: 200,
- *         listData: userData,
- *       });
- *   };
- *
- *   export default userController = {
- *     index
- *   };
- *===================================================
- */
 import bcrypt from "bcrypt";
 import usersModel from "../../models/usersModel.js";
 import systemApi from "../../libraries/systemApi.js";

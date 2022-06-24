@@ -4,7 +4,7 @@ const jsonResponse = (res, data, statusCode = 200) => {
   return res.status(statusCode).end(JSON.stringify(data, null, 4));
 };
 
-const netLocal = (result) => {
+const netLocal = () => {
   const nets = os.networkInterfaces();
   const results = {};
 
@@ -20,7 +20,7 @@ const netLocal = (result) => {
     }
   }
 
-  console.log(results);
+  return results;
 };
 
 export default {

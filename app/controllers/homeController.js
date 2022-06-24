@@ -1,14 +1,8 @@
 /*====================================================
  *                 Example Controller
  *====================================================
- * import usersModel from "../models/usersModel.js";
- *
  * const index = (req, res) => {
- * usersModel.getData((err, result) => {
- *     res.render("home", {
- *       result: result,
- *     });
- *   });
+ *  res.render("view");
  * };
  *
  * export default {
@@ -22,7 +16,7 @@ const index = (req, res) => {
 };
 
 const debug = (req, res) => {
-  res.send(null);
+  res.send("Debugging..");
 };
 
 export default {

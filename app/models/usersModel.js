@@ -15,6 +15,8 @@
  *      freezeTableName: true
  *    }
  * );
+ * 
+ * userModel.sync();
  *
  * export default userModel;
  *==================================================
