@@ -4,10 +4,10 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
-import config from "./app/config/config.js";
-import routerWeb from "./app/routes/web.js";
-import routerApi from "./app/routes/api.js";
-import corsOption from "./app/config/cors.js";
+import config from "./src/config/config.js";
+import routerWeb from "./src/routes/web.js";
+import routerApi from "./src/routes/api.js";
+import corsOption from "./src/config/cors.js";
 
 const app = express();
 
@@ -19,7 +19,7 @@ const port = config.baseUrl().port;
 dotenv.config();
 
 //View Engine
-app.set("views", path.join("app", "views"));
+app.set("views", path.join("src", "views"));
 app.set("view engine", "hbs");
 
 //Body Parser
