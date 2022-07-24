@@ -33,7 +33,7 @@ let tableModel;
 let columnTable = [];
 let configModels = {};
 
-const configData = ({ request, config, model }) => {
+const configData = ({ request, config = {}, model }) => {
   tableModel = model;
   configModels = config;
   requestDataTable(request.body);
