@@ -1,4 +1,5 @@
 import os from "os";
+import fs from "fs";
 
 const jsonResponse = (res, data, statusCode = 200) => {
   return res.status(statusCode).end(JSON.stringify(data, null, 4));
@@ -23,7 +24,41 @@ const netLocal = () => {
   return results;
 };
 
+const videoStream = (req, res, file) => {
+  let range = req.headers.range;
+  if (!range)
+    return res.status(400).end(
+      JSON.stringify(
+        {
+          statusCode: 400,
+          message: "Required Range Headers",
+        },
+        null,
+        4
+      )
+    );
+
+  const videoSize = fs.statSync(file).size;
+
+  //==> Parse Range
+  const chunkSize = 1 * (1024 * 1024); // 1MB
+  const start = Number(range.replace(/\D/g, ""));
+  const end = Math.min(start + chunkSize, videoSize - 1);
+  const contentLength = end - start + 1;
+
+  res.writeHead(206, {
+    "Content-Range": `bytes ${start}-${end}/${videoSize}`,
+    "Accept-Ranges": "bytes",
+    "Content-Length": contentLength,
+    "Content-Type": "video/mp4",
+  });
+
+  const videoStream = fs.createReadStream(file, { start, end });
+  videoStream.pipe(res);
+};
+
 export default {
   jsonResponse,
   netLocal,
+  videoStream,
 };
